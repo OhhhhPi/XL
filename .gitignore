@@ -6,7 +6,7 @@ lkl-kasan
 /fuzzspace-syscall
 /fuzzspace-image-syscall
 /lkl
-/llvm/**
+/llvm
 /llvm-build
 
 *.pyc
