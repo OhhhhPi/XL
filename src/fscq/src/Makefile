@@ -37,7 +37,7 @@ ifeq (,$(shell $(GHC) --version 2>/dev/null | grep 'version 8\.' 2>/dev/null))
 	HSC2HS := /opt/ghc/8.0.1/bin/hsc2hs
 endif
 
-J	   ?= 1
+J	   ?= 30
 GHCARGS    := -j$(J) -O2 -threaded -rtsopts -fllvm -optl-no-pie
 PASSARGS   := -optlo -load=$(PWD)/../../combined/afl-fscq-syscall/afl-llvm-pass.so -optlo -aflcov
 		# -ticky -ticky-dyn-thunk -ticky-allocd
