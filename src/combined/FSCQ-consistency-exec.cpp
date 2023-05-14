@@ -18,21 +18,41 @@
 using namespace std;
 static string fscq_handler;
 
-int is_mounted (char * dev_path) {
-    FILE * mtab = NULL;
-    struct mntent * part = NULL;
-    int is_mounted = 0;
-
-    if ( ( mtab = setmntent ("/etc/mtab", "r") ) != NULL) {
-        while ( ( part = getmntent ( mtab) ) != NULL) {
-            if ( ( part->mnt_dir != NULL ) && ( strcmp ( part->mnt_dir, dev_path ) ) == 0 ) {
-                is_mounted = 1;
-            }
-        }
-        endmntent ( mtab);
+int is_mounted(const char* dev_path) {
+    FILE* mtab = setmntent("/etc/mtab", "r");
+    if (mtab == NULL) {
+        return 0;
     }
+
+    int is_mounted = 0;
+    struct mntent* entry;
+    while ((entry = getmntent(mtab)) != NULL) {
+        if (entry->mnt_dir != NULL && strcmp(entry->mnt_dir, dev_path) == 0) {
+            is_mounted = 1;
+            break;
+        }
+    }
+
+    endmntent(mtab);
     return is_mounted;
 }
+
+
+// int is_mounted (char * dev_path) {
+//     FILE * mtab = NULL;
+//     struct mntent * part = NULL;
+//     int is_mounted = 0;
+
+//     if ( ( mtab = setmntent ("/etc/mtab", "r") ) != NULL) {
+//         while ( ( part = getmntent ( mtab) ) != NULL) {
+//             if ( ( part->mnt_dir != NULL ) && ( strcmp ( part->mnt_dir, dev_path ) ) == 0 ) {
+//                 is_mounted = 1;
+//             }
+//         }
+//         endmntent ( mtab);
+//     }
+//     return is_mounted;
+// }
 
 void umountFSCQ(char *mpoint) {
     int status, child_pid;

@@ -13,6 +13,7 @@ elif [[ $(lsb_release -rs) == "18.04" ]]; then
     flex bison bc libunistring2 libunistring-dev \
     e2fslibs-dev f2fs-tools \
     python3-zmq python-zmq python3-aiozmq python3-zmq-dbg libzmq3-dev libzmq5 \
+    build-essential libblkid-dev
 
 elif [[ $(lsb_release -rs) == "20.04" ]]; then
   echo "install dependencies for Ubuntu 20.04"

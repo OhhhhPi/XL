@@ -48,23 +48,6 @@ build-combined: build-ffgcc
 build-img-sys: build-combined
 	make -C $(AFL_IMG_SYS_DIR) -j${NJOB}
 
-# build-lkl-btrfs: get-lkl
-# 	(cd $(LKL_DIR) && ./compile -t btrfs -c && cd -)
-
-# build-lkl-ext4: get-lkl
-# 	(cd $(LKL_DIR) && ./compile -t ext4 -c && cd -)
-
-# build-lkl-f2fs: get-lkl
-# 	(cd $(LKL_DIR) && ./compile -t f2fs -c && cd -)
-
-# build-lkl-xfs: get-lkl
-# 	(cd $(LKL_DIR) && ./compile -t xfs -c && cd -)
-
-# get-lkl: build-img-sys
-# 	if [ ! -d "$(LKL_DIR)" ]; then \
-# 		git clone https://github.com/sslab-gatech/lkl.git $(LKL_DIR); \
-# 	fi
-
 get-llvm: 
 	if [ ! -d "$(LLVM_DIR)" ]; then \
 		wget http://releases.llvm.org/$(LLVM_VERSION)/$(LLVM_SRC).tar.xz && tar xf $(LLVM_SRC).tar.xz && rm $(LLVM_SRC).tar.xz; \
@@ -74,23 +57,10 @@ get-llvm:
 		cd ../..; \
 	fi
 
-build-btrfs-imgwrp: build-lkl-btrfs
-	make -C $(BTRFS_IMGWRP_DIR)
-
-build-ext4-imgwrp: build-lkl-ext4
-	make -C $(EXT4_IMGWRP_DIR)
-
-build-f2fs-imgwrp: build-lkl-f2fs
-	make -C $(F2FS_IMGWRP_DIR)
-
-build-xfs-imgwrp: build-lkl-xfs
-	make -C $(XFS_IMGWRP_DIR)
-	make -C $(XFS_IMGWRP_DB_DIR)
-	cd $(XFS_IMGWRP_DB_DIR); sudo make install; cd $(PROJ_DIR);
-
 distclean: clean-afl-llvm-mode clean-afl clean-syscall clean-ffgcc
 
 fscq: clean-afl-llvm-mode build-afl-llvm-mode
 	cd ./afl/llvm_mode && make all
 	cd ../.. 
 	cd ./combined/afl-fscq-syscall && make
+	
