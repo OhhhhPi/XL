@@ -2,7 +2,7 @@
 *.a
 *.so
 lkl-kasan
-
+disk.img
 /fuzzspace-syscall
 /fuzzspace-image-syscall
 /lkl

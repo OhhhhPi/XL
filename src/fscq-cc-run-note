@@ -4,7 +4,7 @@
 ```
 $ mkdir /tmp/mnt
 $ mkdir /tmp/crashed
-$ ./combined/fscq/mkfs disk.img & cp combined/fscq/disk.img /tmp/mosbench/tmpfs-separate/46/
+$ ./fscq/src/mkfs disk.img & cp combined/fscq/disk.img /tmp/mosbench/tmpfs-separate/46/
 $ cp /tmp/mosbench/tmpfs-separate/46/disk.img /tmp/mosbench/tmpfs-separate/46/tmp.img
 $ touch /tmp/prog
 ```

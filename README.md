@@ -11,6 +11,7 @@ This repository is provided under the terms of MIT license.
 * Checkers
   - src/emulator: in-house crash consistency checker
 
+![project structure](./projectStructure.png)
 
 ## System requirements
 
